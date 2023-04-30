@@ -76,12 +76,12 @@ class Category :
             print(self.temp_print)
     
 
-def create_spend_chart(var) :
+def create_spend_chart(categories) :
     spent = []
     count = 100
     to_add = ""
     to_print = ["Percentage spent by category"]
-    for n in var:
+    for n in categories:
         deposit = 0
         withdrawal = 0
         for m in n.ledger :
@@ -108,20 +108,20 @@ def create_spend_chart(var) :
         
     to_add = ""
     
-    while len(to_add) < 1+len(var)*3:
+    while len(to_add) < 1+len(categories)*3:
         to_add = to_add + "-"
         
     to_add = "    "+to_add
     to_print.append(to_add)
     
     max_char = 0
-    for n in var:
+    for n in categories:
         max_char = max(max_char,len(n.get_category_name()))
     
     count = 0
     while count < max_char:
         to_add = "     "
-        for n in var :
+        for n in categories :
             if len(n.get_category_name()) > count :
                 to_add = to_add + n.get_category_name()[count] + "  "
             else:
@@ -131,4 +131,3 @@ def create_spend_chart(var) :
     
     for n in to_print:
         print(n)
-
