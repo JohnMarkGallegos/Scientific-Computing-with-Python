@@ -5,7 +5,7 @@ Created on Wed Apr 26 20:28:49 2023
 @author: johnm
 """
 
-class Category() :
+class Category :
 
     def __init__(self,name):
         self.category_name = name
