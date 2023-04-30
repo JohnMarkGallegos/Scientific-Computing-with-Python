@@ -74,13 +74,16 @@ class Category :
                 self.temp = self.temp - 1
             self.temp_print = self.temp_print + str(format(n["amount"],'.2f'))
             print(self.temp_print)
-    
+        print("Total: "+ str(format(self.get_balance(),'.2f')))
+
 
 def create_spend_chart(categories) :
+    
     spent = []
     count = 100
     to_add = ""
     to_print = ["Percentage spent by category"]
+    to_return = ""
     for n in categories:
         deposit = 0
         withdrawal = 0
@@ -89,7 +92,10 @@ def create_spend_chart(categories) :
                 deposit = deposit + m["amount"]
             else :
                 withdrawal = withdrawal + m["amount"]
-        spent.append((n.get_category_name(),int((withdrawal/deposit)*-100)))
+        if deposit >0:
+            spent.append((n.get_category_name(),int((withdrawal/deposit)*-100)))
+        else:
+            spent.append((n.get_category_name(),0))
     
     while count >= 0 :
         to_add = ""
@@ -105,7 +111,7 @@ def create_spend_chart(categories) :
                 to_add = to_add + "   "
         to_print.append(to_add)
         count = count - 10
-        
+     
     to_add = ""
     
     while len(to_add) < 1+len(categories)*3:
@@ -128,6 +134,9 @@ def create_spend_chart(categories) :
                 to_add = to_add + "   "
         to_print.append(to_add)
         count = count + 1
+   
     
     for n in to_print:
-        print(n)
+       to_return = to_return + "\n" + n
+     
+    return to_return
